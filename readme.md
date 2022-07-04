@@ -6,7 +6,7 @@
   - Function Scope
 - Event callback function follows the function scope,
 - Loops can also have their block scope.
-  Variable can be defined using var,let or cont keywords
+  Variable can be defined using var,let or const keywords
 
 ## variables are casesensitive
 
@@ -452,7 +452,7 @@ It executes a provided funtion once for each array element.the return value is u
 ```Javascript
 let arr = [1, 2, 3, 5, 78];
 arr.forEach((element) => console.log(element));
-//1
+// 1
 // 2
 // 3
 // 5
@@ -464,11 +464,20 @@ arr.forEach((element) => console.log(element));
 Return value is boolean
 
 ```JAvascript
-let arr = [1, 2, 3, 5, 78];
-arr.every((element) => console.log(element < 70));   ///true
+const val = (currentValue) => currentValue < 10;
+const array1 = [1, 30, 39, 29, 10, 13];
+console.log(array1.every(val));//false
 ```
 
 ### Array.some()
+
+The some() method checks if any array elements pass a test
+
+```Javascript
+const array = [1, 2, 3, 4, 5];
+const even = (element) => element % 2 === 0;
+console.log(array.some(even)); //true
+```
 
 ### Array.filter()
 
@@ -505,6 +514,151 @@ const sumWithInitial = array1.reduce(
 console.log(sumWithInitial); //10
 ```
 
+### Object handling
+
+An object is a collection of properties and a property is an association of name and value
+
+### create an object:
+
+```Javascript
+const myCar = new Object();  //  create an object
+myCar.make = "Ford";        //{ make: 'Ford', model: 'Mustang', year: 1969 }
+myCar.model = "Mustang";
+myCar.year = 1969;
+console.log(myCar);
+```
+
+### access the object properties
+
+```Javascript
+const myCar = new Object();
+myCar.make = "Ford";      //Ford
+myCar.model = "Mustang";
+myCar.year = 1969;
+console.log(myCar.make);
+```
+
+### not access the property
+
+```Javascript
+const myCar = new Object();
+myCar.make = "Ford";
+myCar.model = "Mustang";
+myCar.year = 1969;
+console.log(myCar.ma);   //undefined
+```
+
+### Using constructor function:
+
+create a instance of an object with a new keyword is used.
+
+### Notice:
+
+- The use of this to assign the value of the object properties based on the value passed to the function
+
+```Javascript
+function car(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+}
+const myCar = new car("re", "thunderbird", 1990);
+console.log(myCar);    /car { make: 're', model: 'thunderbird', year: 1990 }
+```
+
+### Getters and setters:
+
+- A getter is a method to get a value from the specific property.
+- A setter is a method to set the value of the specific property.
+
+```Javascript
+const car = {
+  a: "ford",
+  get b() {
+    return this.a + " " + "fiesta";
+  },
+  set c(x) {
+    this.a = "ford" + " " + x;
+  },
+};
+console.log(car.a);   //ford
+console.log(car.b);   //ford fiesta
+car.c = "mustang";
+console.log(car.a);   //ford mustang
+```
+
+### Delete Object properties
+
+YOu can remove a object property we use "delete" operator
+
+```Javascript
+const myobj = new Object();
+(myobj.a = 10), (myobj.b = 20);
+console.log(myobj);      //{ a: 10, b: 20 }
+delete myobj.a;
+console.log(myobj);      //{ b: 20 }
+```
+
+### Comparing two object
+
+two distinct object are never equal even if they have same properties
+
+```Javascript
+const fruit = { name: "apple" };
+const fruitbear = { name: "apple" };
+
+console.log(fruit != fruitbear); //  true
+console.log(fruit === fruitbear); // false
+```
+
+Two variables and single object refer the another object
+
+```Javascript
+let fruitbear = { name: "apple" };
+let fruit = fruitbear;
+console.log(fruit != fruitbear); //  false
+console.log(fruit === fruitbear); // true
+```
+
+### Classes
+
+Classes are a template for creating objects.
+
+- classes are in fact the special functions you can define function expressions and function declaration,the class have two components class expressions,class declaration.
+- The body of the class is the part in the cutrly braces,This is where you define class members such as methods and constructors
+
+### Constructor
+
+- The constructor is a special method for creating or initializing the object with class
+- A constructor can use the super keyword to call the constructor of the super class
+### Static method and properties:
+
+
+#### Class Declaration
+
+You declare the variable we use the class keyword.
+
+```Javascript
+class rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+  get area() {
+    return this.calcArea();
+  }
+  calcArea() {
+    return this.height * this.width;
+  }
+}
+
+const square = new rectangle(100, 10);
+
+console.log(square.area);        //1000
+```
+
+###
+
 ### Arrow function:
 
 An arrow function is an alternative of an function expression but it is limited it cant be used in all situation.arrow function is the shortest form of the function expression.Arrow function no return keyword and no curly braces.
@@ -518,11 +672,39 @@ const team = ["csk", "mi", "punjab"];
 console.log(team.map((team) => team.length)); //[3,2,6]
 ```
 
+### Event settimeout and setinterval
+
+- 1 second =1000 millisecond
+
+#### Event settimeout:
+
+the set timeout() method sets a timer executes a function or specified piece of code once the timer expires
+
+```Javascript
+let callback = function () {
+  console.log("events!");    //events!
+};
+let timer = setTimeout(callback, 10000);
+clearTimeout(timer);
+timer = null;
+```
+
+#### Setinterval
+
+It repeatdly calls a function or executes a code snippet with a fixed time delay between each call.the clear time out is used to out from the timer.
+
+```Javascript
+let callback = function () {
+  console.log("events!");
+};
+let timer = setInterval(callback, 1000);//events! events! .....
+```
+
 ### Event loop
 
 #### Call stack
 
-The call stack is the place to keep track of currently executing function.each call eill be placed on call stack if the function is returns it will be removed from the call stack.
+The call stack is the place to keep track of currently executing function.each call will be placed on call stack if the function is returns it will be removed from the call stack.
 A function call on to the stack if we want push into the stack we use push and we want to pop we use pop method.
 
 #### Execution context
@@ -530,3 +712,11 @@ A function call on to the stack if we want push into the stack we use push and w
 Everything in javascript happen inside an Execution Context.
 
 In JavaScript, execution context is an abstract concept that holds information about the environment within which the current code is being executed.the JavaScript engine creates the global execution context before it starts to execute any code.
+
+```Javascript
+console.log("Hi");
+setTimeout(function cb1() {
+  console.log("cb1");    //Hi
+}, 5000);                //Bye
+console.log("Bye");      //cb1
+```
