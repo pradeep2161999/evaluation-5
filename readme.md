@@ -631,8 +631,8 @@ Classes are a template for creating objects.
 
 - The constructor is a special method for creating or initializing the object with class
 - A constructor can use the super keyword to call the constructor of the super class
-### Static method and properties:
 
+### Static method and properties:
 
 #### Class Declaration
 
@@ -702,6 +702,85 @@ let timer = setInterval(callback, 1000);//events! events! .....
 
 ### Event loop
 
+### Promise
+
+Promises are used to handle asynchronous operations in JavaScript. They are easy to manage when dealing with multiple asynchronous operations where callbacks can create callback hell leading to unmanageable code.
+
+Benefits of Promises :
+
+- Improves Code Readability
+- Better handling of asynchronous operations
+- Better flow of control definition in asynchronous logic
+- Better Error Handling
+  The promise object takes two parameter like resolve,reject.
+
+### Syntax:
+
+```Javascript
+var promise = new Promise(function(resolve, reject){
+ // write logics here
+});
+```
+
+### then()
+
+then() is invoked when a promise is either resolved or rejected.
+
+```Javascript
+.then(function(result){
+    //handle success
+}, function(error){
+    //handle error
+})
+```
+
+### catch()
+
+catch() is invoked when a promise is either rejected or some error has occured in execution.
+
+```Javascript
+.catch(function(error){
+    //handle error
+})
+```
+
+### finally()
+
+The finally method is executed regardless of whether event succeeded with resolve method or failed with reject method. It is a good place for cleaning up the code or update the UI view
+
+```Javascript
+    promise.finally(function(msg) {
+        console.log("finally: hide the loading animation")
+    });
+```
+
+### Promise.resolve:
+
+The resolve method indicates that the promise has been successfully fulfilled For contains the return value itcan be a string.
+
+### async await
+
+### Async functions :
+
+The async keyword. It can be placed before a function, example look bellow.
+
+```Javascript
+  async function f() {
+      return 1;
+  }
+```
+
+The word async before a function means one simple thing: a function always returns a promise. Other values are wrapped in a resolved promise automatically.
+
+### Await :
+
+The keyword await makes JavaScript wait until that promise settles and returns its result.
+
+// let value = await promise;
+we cannot return the data in async function that is, return type of async function is only on promise after that we can get a data using .Then method.
+
+without using .then we can use await and get a data inside a async function.
+
 #### Call stack
 
 The call stack is the place to keep track of currently executing function.each call will be placed on call stack if the function is returns it will be removed from the call stack.
@@ -720,3 +799,25 @@ setTimeout(function cb1() {
 }, 5000);                //Bye
 console.log("Bye");      //cb1
 ```
+
+In JavaScript, execution context is an abstract concept that holds information about the environment within which the current code is being executed.
+
+### Remember:
+
+the JavaScript engine creates the global execution context before it starts to execute any code.
+
+### call, apply Method:
+
+The call() method calls a function with a given this value and arguments provided individually.
+
+call() and apply() serve the exact same purpose. The only difference between how they work is that call() expects all parameters to be passed in individually, whereas apply() expects an array of all of our parameters. Example:
+
+The main differences between bind() and call() is that the call() method:
+
+Accepts additional parameters as well
+Executes the function it was called upon right away.
+The call() method does not make a copy of the function it is being called on.
+
+### Bind
+
+The bind() method creates a new function that, when called, has its this keyword set to the provided value.
